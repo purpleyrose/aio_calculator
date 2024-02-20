@@ -83,10 +83,20 @@ def gcd(a, b):
         a, b = b, a % b
     return a
 
+def lcm(a, b):
+    return abs(a*b) // gcd(a, b) # The absolute value is used to prevent negative numbers from being returned
+
+def radians_to_degrees(a):
+    return math.degrees(a)
+
+def degrees_to_radians(a):
+    return math.radians(a)
+
+
 def choice_operation(a, b):
     print("Which operation would you like to use?")
     operation = input(
-        "+\t -\t x\t / \n //\t ^\t sqrt\t nrt \n |x|\t x!\t log\t ln \n Sin\t Cos\t Tan\n Asin\t Acos\t Atan\n"
+        "+\t -\t x\t / \n //\t ^\t sqrt\t nrt \n |x|\t x!\t log\t ln \n Sin\t Cos\t Tan\n Asin\t Acos\t Atan\n gcd\t lcm\t radians degrees\n"
     )
     match operation:
         case "+":
@@ -125,11 +135,18 @@ def choice_operation(a, b):
             print(acos(a))
         case "atan":
             print(atan(a))
+        case "gcd":
+            print(gcd(a, b))
+        case "lcm":
+            print(lcm(a, b))
+        case "radians":
+            print(radians_to_degrees(a))
+        case "degrees":
+            print(degrees_to_radians(a))
         case _:
             print("Invalid operation")
 
 def arithmatics_main():
-    a = int(input("Enter the first number: "))
-    b = int(input("Enter the second number: "))
+    a = float(input("Enter the first number: "))
+    b = float(input("Enter the second number: "))
     choice_operation(a, b)
-

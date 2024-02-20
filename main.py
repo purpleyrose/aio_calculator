@@ -1,4 +1,5 @@
 import arithmetic
+import geometric_calculations
 
 def greeting():
     print("*********************************")
@@ -6,7 +7,7 @@ def greeting():
 
 def choice_mode():
     print("Which mode would you like to use?")
-    mode = int(input("1. Simple arithmetics\n 2. Discrete sums\n 3. Mapping basic functions\n 4. Geometric Calculations\n 5: Exit"))
+    mode = int(input(" 1. Simple arithmetics\n 2. Discrete sums\n 3. Mapping basic functions\n 4. Geometric Calculations\n 5: Exit\n"))
     match mode:
         case 1:
             arithmetic.arithmatics_main()
@@ -17,8 +18,8 @@ def choice_mode():
             TBD()
             #mapping_basic_functions_main()
         case 4:
-            TBD()
-            #geometric_calculations_main()
+            
+            geometric_calculations.geometric_calculations_main()
         case 5:
             print("Exiting...")
             exit()
