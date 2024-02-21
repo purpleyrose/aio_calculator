@@ -7,10 +7,10 @@ class Circle:
         self.radius = radius
     
     def area(self):
-        return math.pi * (self.radius ** 2) # By area of a cirlce = pi * r^2
+        return math.pi * (self.radius ** 2) # By area of a circle = pi * r^2
 
     def circumference(self):
-        return 2 * math.pi * self.radius
+        return 2 * math.pi * self.radius # Circumference = 2 pi r
     
     def diameter(self):
         return 2 * self.radius
@@ -35,39 +35,20 @@ class Triangle:
     def perimeter(self):
         return self.a + self.b + self.c
     
-    # Heron's formula states that the area of a triangle is the square root of s(s-a)(s-b)(s-c) where s is the semi-perimeter
     def area(self):
+        """_summary_
+        Herons formula for area of a triangle states that area is equal to sqrt(s(s-a)(s-b)(s-c)), where s is the semiperimeter (the perimeter divided by two) of the triangle
+        Returns:
+            float: The result may be positive real number
+        """
         s = (self.a + self.b + self.c) / 2
         return math.sqrt(s * (s - self.a) * (s - self.b) * (s - self.c))
     
-    # Recall that the sin law states that a/sin(A) = b/sin(B) = c/sin(C)
-    # By having one of our variables be zero, we can solve for the others
-    # We always need at least one side and one angle to solve for the others
-    def sin_law(self):
-        if self.a != 0 and self.A != 0: # Solve for a
-            return self.a / math.sin(A)
-        elif self.b != 0 and self.B != 0: # Solve for b
-            return self.b / math.sin(B)
-        elif self.c != 0 and self.C != 0: # Solve for c
-            return self.c / math.sin(C)
-        else: 
-            return "Undefined"
-    def pythagorean_theoream(self):
-        return math.sqrt((self.a ** 2) + (self.b ** 2))
     
-    def cosine_law(self):
-        # Solve for A
-        if self.a != 0 and self.b != 0 and self.c != 0:
-            return math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c))
-        # Solve for B
-        elif self.a != 0 and self.b != 0 and A != 0:
-            return math.sqrt(a ** 2 + b ** 2 - 2 * a * b * math.cos(A))
-        elif self.a != 0 and self.c != 0 and self.B != 0:
-            return math.sqrt(a ** 2 + c ** 2 - 2 * a * c * math.cos(B))
-        elif self.b != 0 and self.c != 0 and self.C != 0:
-            return math.sqrt(b ** 2 + c ** 2 - 2 * b * c * math.cos(C))
-        else:
-            return "Undefined"
+   
+    def pythagorean_theorem(self):
+        return math.sqrt((self.a ** 2) + (self.b ** 2)) # By the pythagorean theorem; a^2+b^2=c^2
+    
 
 
 class Rectangle:
@@ -85,6 +66,11 @@ class Rectangle:
         return math.sqrt((self.length ** 2) + (self.width ** 2))
     
     def is_square(self):
+        """[summary]
+        Determines whether the given rectangle object is a square
+        Returns:
+            bool: Returns true if self.width is equal to self.length
+        """        
         return self.length == self.width
 
 
@@ -164,14 +150,14 @@ class Parallelogram:
         self.height = height
         self.side = side
     
-    def area(self, base, height):
-        return base * height
+    def area(self):
+        return self.base * self.height
     
-    def perimeter(self, base, side):
-        return 2 * (base + side)
+    def perimeter(self):
+        return 2 * (self.base + self.side)
     
-    def diagonal(self, base, height):
-        return math.sqrt((base ** 2) + (height ** 2))
+    def diagonal(self):
+        return math.sqrt((self.base ** 2) + (self.height ** 2))
 
 class Rhombus:
     def __init__(self, base, height, side):
@@ -220,13 +206,34 @@ class Ellipse:
     def circumference(self):
         return math.pi * (3 * (self.a + self.b) - math.sqrt((3 * self.a + self.b) * (self.a + 3 * self.b)))
 
+
+def get_float_input(prompt):
+    """_summary_
+        Gets a float number from the user
+    Args:
+        prompt (str): The string that is displayed to the user to get the number
+
+    Raises:
+        TypeError: If the inputed number is not a float type.
+    Returns:
+        float: Returns a float number 
+    
+    """    
+    while True:
+        try:
+            return float(input(prompt))
+        except TypeError:
+            print("Invalid number")
+
+
+
 def geometric_calculations_main():
     print("Which shape would you like to calculate? ")
     shape = input("Circle\t Triangle\t Rectangle\t Polygon\t Sphere\t Cylinder\t Cone\t Prism\t Pyramid\t Parallelogram\t Rhombus\t Trapezoid\t Ellipse\n")
 
     match shape.lower():
         case "circle":
-            radius = float(input("What is the radius of the circle? "))
+            radius = get_float_input("What is the radius of the circle? ")
             circle = Circle(radius)
             print("What would you like to calculate? ")
             calculation = input("Area\t Circumference\t Diameter\t Sector Area\t Arc Length\n")
@@ -238,39 +245,35 @@ def geometric_calculations_main():
                 case "diameter":
                     print(circle.diameter())
                 case "sector area":
-                    angle = float(input("What is the angle of the sector? "))
+                    angle = get_float_input("What is the angle of the sector? ")
                     print(circle.sector_area(angle))
                 case "arc length":
-                    angle = float(input("What is the angle of the arc? "))
+                    angle = get_float_input("What is the angle of the arc? ")
                     print(circle.arc_length(angle))
                 case _:
                     print("Invalid input")
         case "triangle":
-            a = float(input("What is the length of side a? "))
-            b = float(input("What is the length of side b? "))
-            c = float(input("What is the length of side c? "))
-            A = float(input("What is the angle of A (in radians)? If you do not know the length, put 0 "))
-            B = float(input("What is the angle of B (in radians) ? If you do not know the length, put 0 "))
-            C = float(input("What is the angle of C (in radians) ? If you do not know the length, put 0 "))
+            a = get_float_input("What is the length of side a? ")
+            b = get_float_input("What is the length of side b? ")
+            c = get_float_input("What is the length of side c? ")
+            A = get_float_input("What is the angle of A (in radians)? If you do not know the length, put 0: ")
+            B = get_float_input("What is the angle of B (in radians) ? If you do not know the length, put 0: ")
+            C = get_float_input("What is the angle of C (in radians) ? If you do not know the length, put 0: ")
             triangle = Triangle(a, b, c, A, B, C)
             print("What would you like to calculate?")
-            calculation = input("Perimeter\t Area\t Sin Law\t Pythagorean Theoream\t Cosine Law\n")
+            calculation = input("Perimeter\t Area\t Pythagorean Theorem\n")
             match calculation.lower():
                 case "perimeter":
                     print(triangle.perimeter())
                 case "area":
                     print(triangle.area())
-                case "sin law":
-                    print(triangle.sin_law())
-                case "pythagorean theoream":
-                    print(triangle.pythagorean_theoream())
-                case "cosine law":
-                    print(triangle.cosine_law())
+                case "pythagorean theorem":
+                    print(triangle.pythagorean_theorem())
                 case _:
                     print("Invalid input")
         case "rectangle":
-            length = float(input("What is the length of the rectangle? "))
-            width = float(input("What is the width of the rectangle? "))
+            length = get_float_input("What is the length of the rectangle? ")
+            width = get_float_input("What is the width of the rectangle? ")
             rectangle = Rectangle(length, width)
             print("What would you like to calculate? ")
             calculation = input("Area\t Perimeter\t Diagonal\t Is Square\n")
@@ -287,7 +290,7 @@ def geometric_calculations_main():
                     print("Invalid input")
         case "polygon":
             sides = int(input("How many sides does the polygon have? "))
-            length = float(input("What is the length of the polygon? "))
+            length = get_float_input("What is the length of the polygon? ")
             polygon = Polygon(sides, length)
             print("What would you like to calculate? ")
             calculation = input("Perimeter\t Area\t Apothem\n")
@@ -301,7 +304,7 @@ def geometric_calculations_main():
                 case _:
                     print("Invalid input")
         case "sphere":
-            radius = float(input("What is the radius of the sphere? "))
+            radius = get_float_input("What is the radius of the sphere? ")
             sphere = Sphere(radius)
             print("What would you like to calculate? ")
             calculation = input("Volume\t Surface Area\n")
@@ -313,8 +316,8 @@ def geometric_calculations_main():
                 case _:
                     print("Invalid input")
         case "cylinder":
-            radius = float(input("What is the radius of the cylinder? "))
-            height = float(input("What is the height of the cylinder? "))
+            radius = get_float_input("What is the radius of the cylinder? ")
+            height = get_float_input("What is the height of the cylinder? ")
             cylinder = Cylinder(radius, height)
             print("What would you like to calculate? ")
             calculation = input("Volume\t Surface Area\n")
@@ -326,8 +329,8 @@ def geometric_calculations_main():
                 case _:
                     print("Invalid input")
         case "cone":
-            radius = float(input("What is the radius of the cone? "))
-            height = float(input("What is the height of the cone? "))
+            radius = get_float_input("What is the radius of the cone? ")
+            height = get_float_input("What is the height of the cone? ")
             cone = Cone(radius, height)
             print("What would you like to calculate?")
             calculation = input("Volume\t Surface Area\n")
@@ -339,9 +342,9 @@ def geometric_calculations_main():
                 case _:
                     print("Invalid input")
         case "prism":
-            base = float(input("What is the base of the prism? "))
-            height = float(input("What is the height of the prism? "))
-            sides = float(input("How many sides does the prism have? "))
+            base = get_float_input("What is the base of the prism? ")
+            height = get_float_input("What is the height of the prism? ")
+            sides = get_float_input("How many sides does the prism have? ")
             prism = Prism(base, height, sides)
             print("What would you like to calculate?")
             calculation = input("Volume\t Surface Area\n")
@@ -353,8 +356,8 @@ def geometric_calculations_main():
                 case _:
                     print("Invalid input")
         case "pyramid":
-            base = float(input("What is the base of the pyramid? "))
-            height = float(input("What is the height of the pyramid? "))
+            base = get_float_input("What is the base of the pyramid? ")
+            height = get_float_input("What is the height of the pyramid? ")
             pyramid = Pyramid(base, height)
             print("What would you like to calculate?")
             calculation = input("Volume\t Surface Area\n")
@@ -366,9 +369,9 @@ def geometric_calculations_main():
                 case _:
                     print("Invalid input")
         case "parallelogram":
-            base = float(input("What is the base of the parallelogram? "))
-            height = float(input("What is the height of the parallelogram? "))
-            side = float(input("What is the side of the parallelogram? "))
+            base = get_float_input("What is the base of the parallelogram? ")
+            height = get_float_input("What is the height of the parallelogram? ")
+            side = get_float_input("What is the side of the parallelogram? ")
             parallelogram = Parallelogram(base, height, side)
             print("What would you like to calculate?")
             calculation = input("Area\t Perimeter\t Diagonal\n")
@@ -382,9 +385,9 @@ def geometric_calculations_main():
                 case _:
                     print("Invalid input")
         case "rhombus":
-            base = float(input("What is the base of the rhombus? "))
-            height = float(input("What is the height of the rhombus? "))
-            side = float(input("What is the side of the rhombus? "))
+            base = get_float_input("What is the base of the rhombus? ")
+            height = get_float_input("What is the height of the rhombus? ")
+            side = get_float_input("What is the side of the rhombus? ")
             rhombus = Rhombus(base, height, side)
             print("What would you like to calculate?")
             calculation = input("Area\t Perimeter\t Diagonal\n")
@@ -398,11 +401,11 @@ def geometric_calculations_main():
                 case _:
                     print("Invalid input")
         case "trapezoid":
-            base1 = float(input("What is the length of the first base? "))
-            base2 = float(input("What is the length of the second base? "))
-            height = float(input("What is the height of the trapezoid? "))
-            side1 = float(input("What is the length of the first side? "))
-            side2 = float(input("What is the length of the second side? "))
+            base1 = get_float_input("What is the length of the first base? ")
+            base2 = get_float_input("What is the length of the second base? ")
+            height = get_float_input("What is the height of the trapezoid? ")
+            side1 = get_float_input("What is the length of the first side? ")
+            side2 = get_float_input("What is the length of the second side? ")
             trapezoid = Trapezoid(base1, base2, height, side1, side2)
             print("What would you like to calculate?")
             calculation = input("Area\t Perimeter\t Median\t Height\n")
@@ -418,8 +421,8 @@ def geometric_calculations_main():
                 case _:
                     print("Invalid input")
         case "ellipse":
-            a = float(input("What is the length of a? "))
-            b = float(input("What is the length of b? "))
+            a = get_float_input("What is the length of a? ")
+            b = get_float_input("What is the length of b? ")
             ellipse = Ellipse(a, b)
             print("What would you like to calculate? ")
             calculation = input("Area\t Circumference\n")

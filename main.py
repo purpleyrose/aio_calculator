@@ -3,14 +3,14 @@ import geometric_calculations
 
 def greeting():
     print("*********************************")
-    print("Hello! This is a simple calculator with several different functions, such as simple arithmatics, discrete sums, and mapping basic functions")
+    print("Hello! This is a simple calculator with several different functions, such as simple arithmetics, discrete sums, and mapping basic functions")
 
 def choice_mode():
     print("Which mode would you like to use?")
     mode = int(input(" 1. Simple arithmetics\n 2. Discrete sums\n 3. Mapping basic functions\n 4. Geometric Calculations\n 5: Exit\n"))
     match mode:
         case 1:
-            arithmetic.arithmatics_main()
+            arithmetic.arithmetic_main()
         case 2:
             TBD()
             #discrete_sums_main()

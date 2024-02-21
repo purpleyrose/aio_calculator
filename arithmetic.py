@@ -146,7 +146,7 @@ def choice_operation(a, b):
         case _:
             print("Invalid operation")
 
-def arithmatics_main():
+def arithmetic_main():
     a = float(input("Enter the first number: "))
     b = float(input("Enter the second number: "))
     choice_operation(a, b)
