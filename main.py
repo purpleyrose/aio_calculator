@@ -1,32 +1,39 @@
-import arithmetic
-import geometric_calculations
-
+from math_functions import arithmetic, functions, geometric_calculations
+import modes
 def greeting():
     print("*********************************")
     print("Hello! This is a simple calculator with several different functions, such as simple arithmetics, discrete sums, and mapping basic functions")
 
 def choice_mode():
     print("Which mode would you like to use?")
-    mode = int(input(" 1. Simple arithmetics\n 2. Discrete sums\n 3. Mapping basic functions\n 4. Geometric Calculations\n 5: Exit\n"))
+    mode = int(input(" 1. Math\n 2. Physics \n 3. Chemistry \n 4. Biology \n 5.Ecology \n 6.Conversions \n 7. Everyday life\n 8. Finance\n 9. Statistics\n 10. Exit\n"))
     match mode:
         case 1:
-            arithmetic.arithmetic_main()
+            modes.math_mode()
         case 2:
-            TBD()
-            #discrete_sums_main()
-        case 3: 
-            TBD()
-            #mapping_basic_functions_main()
+            modes.physics_mode()
+        case 3:
+            modes.chemistry_mode()
         case 4:
-            
-            geometric_calculations.geometric_calculations_main()
+            modes.biology_mode()
         case 5:
-            print("Exiting...")
+            modes.ecology_mode()
+        case 6:
+            modes.conversions_mode()
+        case 7:
+            modes.everyday_life_mode()
+        case 8:
+            modes.finance_mode()
+        case 9:
+            modes.statistics_mode()
+        case 10:
             exit()
+        case _:
+            print("Invalid mode")
+            choice_mode()      
+            
 
 
-def TBD():
-    print("This function is not yet implemented")
 
 
 def main():

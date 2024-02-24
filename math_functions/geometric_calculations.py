@@ -214,7 +214,7 @@ def get_float_input(prompt):
         prompt (str): The string that is displayed to the user to get the number
 
     Raises:
-        TypeError: If the inputed number is not a float type.
+        TypeError: If the inputted number is not a float type.
     Returns:
         float: Returns a float number 
     
